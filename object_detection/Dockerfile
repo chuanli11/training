@@ -5,7 +5,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 # install basics
 RUN apt-get update -y \
  && apt-get install -y apt-utils=1.2.29ubuntu0.1 \
-                       libglib2.0-0=2.48.2-0ubuntu4.1 \
+                       libglib2.0-0 \
                        libsm6=2:1.2.2-1 \
                        libxext6=2:1.3.3-1 \
                        libxrender-dev=1:0.9.9-0ubuntu1

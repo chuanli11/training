@@ -1,3 +1,18 @@
+# Lambda Notes
+
+```
+cd training/object_detection
+
+source download_dataset.sh
+
+# Single GPU
+sudo nvidia-docker run -v "$PWD":/workspace -t -i --rm --ipc=host mlperf/object_detection /bin/bash -c "./install.sh; ./run_and_time.sh"
+
+# Multiple GPUs
+https://github.com/mlperf/training/tree/master/object_detection/pytorch#multi-gpu-training
+```
+
+
 # 1. Problem
 Object detection and segmentation. Metrics are mask and box mAP.
 
