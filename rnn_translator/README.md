@@ -1,3 +1,58 @@
+# Lambda Notes
+
+### Prepare Data
+
+This will take a long time (1 - 2 hours)
+```
+bash download_dataset.sh
+
+bash verify_dataset.sh
+```
+
+### Build Docker Image
+
+This program is memory intensive. One should cusotmize the 'batch_size' arguments in the 'seq2seq/run.sh' script for different GPUs. Reference setting:
+
+- 11GB: 64, 32, 32
+
+
+```
+cd pytorch
+
+sudo docker build . --rm -t gnmt:latest
+
+```
+
+### Run benchmark
+
+
+
+__Single GPU__
+
+```
+SEED=1
+NOW=`date "+%F-%T"`
+
+sudo nvidia-docker run -it --rm --ipc=host \
+  -v $(pwd)/../data:/data \
+  gnmt:latest "./run_and_time.sh" $SEED |tee benchmark-$NOW.log
+
+```
+
+__Multi-GPU__
+
+Use the following in 'seq2seq/run.sh':
+
+```
+python3 -m torch.distributed.launch --nproc_per_node=2 train.py \
+  --dataset-dir ${DATASET_DIR} \
+  --seed $SEED \
+  --target-bleu $TARGET \
+  --train-batch-size 64 \
+  --val-batch-size 32 \
+  --test-batch-size 32
+```
+
 # 1. Problem
 
 This problem uses recurrent neural network to do language translation.
