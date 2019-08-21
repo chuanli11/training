@@ -2,3 +2,5 @@
 __pycache__/
 *.py[cod]
 *$py.class
+data_generation/fractal_graph_expansions/venv/*
+recommendation/ml-20m.zip

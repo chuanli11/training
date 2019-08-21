@@ -1,3 +1,32 @@
+# Lambda Notes
+
+### Prepare Data
+
+```
+bash download_data.sh
+```
+
+### Build Docker Image
+
+Model is memory intensive. Choose different types of model in 'run_training.sh' accordingly.
+
+- 11GB: base
+- 32GB: big
+ 
+```
+cd translation/tensorflow
+IMAGE=`sudo docker build . | tail -n 1 | awk '{print $3}'`
+```
+
+### Run Benchmark
+
+```
+SEED=1
+NOW=`date "+%F-%T"`
+
+sudo docker run     --runtime=nvidia     -v /home/ubuntu/git/training/translation/raw_data:/raw_data     -v /home/ubuntu/git/training/compliance:/mlperf/training/compliance     -e "MLPERF_COMPLIANCE_PKG=/mlperf/training/compliance"     -t -i $IMAGE "./run_and_time.sh" $SEED | tee benchmark-$NOW.log
+```
+
 
 # 1. Problem 
 

@@ -1,0 +1,6 @@
+raw_data/*
+tensorflow/*.log
+tensorflow/transormer/*.log
+tensorflow/*.de
+tensorflow/*.en
+

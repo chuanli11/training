@@ -30,8 +30,10 @@ from model import model_params
 import transformer_main
 from utils import tokenizer
 
+
 _DECODE_BATCH_SIZE = 32
 _EXTRA_DECODE_LENGTH = 100
+
 _BEAM_SIZE = 4
 _ALPHA = 0.6
 
